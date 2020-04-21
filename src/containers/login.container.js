@@ -14,6 +14,7 @@ class UserLogin extends React.Component {
     }
 
     handleSubmit(event) {
+        console.log("submit")
         this.props.login(this.state);
         event.preventDefault();
     }

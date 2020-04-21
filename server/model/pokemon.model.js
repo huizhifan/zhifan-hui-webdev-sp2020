@@ -28,10 +28,15 @@ function findPokemonById(id) {
     return PokemonModel.findById(id).exec();
 }
 
+function deletePokemonById(id) {
+    return PokemonModel.findById(id).remove().exec();
+}
+
 // Make sure to export a function after you create it!
 module.exports = {
     insertPokemon,
     findPokemonByOwner,
     getAllPokemon,
-    findPokemonById
+    findPokemonById,
+    deletePokemonById,
 };

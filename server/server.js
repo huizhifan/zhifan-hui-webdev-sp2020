@@ -3,6 +3,7 @@ const user = require('./controller/user.controller');
 const pokemon = require('./controller/pokemon.controller');
 const item = require('./controller/items.controller');
 const pokedex = require('./controller/pokedex.controller');
+const url = require('./controller/url.controller');
 
 const app = express();
 
@@ -22,8 +23,8 @@ const session = require('express-session')
 // This will manage our sesssion data.
 // We can use our secret from our JWT tokens
 const MongoStore = require('connect-mongo')(session);
-    
-app.use(session({secret: process.env.SUPER_SECRET,
+
+app.use(session({secret: process.env.SUPER_SECRET || "SUPER_SECRET",
     store: new MongoStore({
         mongooseConnection : db,
     })}));
@@ -40,6 +41,7 @@ app.use('/api/pokemon', pokemon);
 app.use('/api/user', user);
 app.use('/api/items', item);
 app.use('/api/pokedex', pokedex);
+app.use('/api/url', url);
 
 app.listen(3001, function() {
     console.log('Starting server');

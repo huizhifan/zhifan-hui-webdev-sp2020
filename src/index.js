@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import reducers from './reducers';
+import Urls from "./containers/url.container"
 import Welcome from "./components/welcome.component";
 import thunkMiddleware from 'redux-thunk';
 import {
@@ -13,21 +14,19 @@ import UserLogin from "./containers/login.container";
 import Pokemons from "./containers/pokemons.container";
 import Register from "./containers/register.container";
 import LoggedInComponent from './components/loggedin.component'
+import RedirectUrlComponent from './components/redirectUrl.component'
+import DeleteUrl from './components/url.delete.component'
+import {redirectUrl} from "./actions/url.action";
 
 const userStore = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(
     <Provider store={userStore}>
         <BrowserRouter>
-        <Link to={'/login'}>Login</Link>&nbsp;
-        <Link to={'/register'}>Register</Link>
-            <Switch>
-                <Route path="/welcome" component={Welcome}/>
-                <Route path="/login" component={UserLogin}/>
-                <Route path="/register" component={Register}/>
-                <Route path="/pokemon" component={LoggedInComponent(Pokemons)}/>
-                <Redirect exact from="/" to="login"/>
-            </Switch>
+            <Route path="/url" component={Urls} />
+            <Route path="/url/:shorten" component={RedirectUrlComponent}  />
+            <Route path="/edit/:shorten" component={DeleteUrl} />
+            <Redirect exact from="/" to="url"/>
         </BrowserRouter>
     </Provider>,
 

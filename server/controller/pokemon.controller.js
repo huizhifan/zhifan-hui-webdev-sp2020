@@ -25,15 +25,11 @@ router.get('/:id', function (req, res) {
             (error) =>  res.status(404).send(`Error finding Pokemon:${error}`));
 });
 
-// router.delete('/:id', function (req, res) {
-//     const id = req.params.id;
-//     for (var i = pokemons.length - 1; i >= 0; i--) {
-//         if (pokemons[i]._id === id) {
-//             pokemons.splice(i, 1);
-//         }
-//     }
-//
-//     res.status(200).send('Success!');
-// });
+router.delete('/:id', function (req, res) {
+    return PokemonAccessor.deletePokemonById(req.params.id)
+        .then((response) => res.status(200).send(response),
+            (error) =>  res.status(404).send(`Error finding Pokemon:${error}`));
+
+});
 
 module.exports = router;
