@@ -8,7 +8,7 @@ import {withRouter} from "react-router";
 class RedirectUrlComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.url = {shortenUrl:"", originalUrl: ""};
+        this.originalUrl = "";
         this.shortenUrl = "https://zhifanhui--webdev-a4.herokuapp.com/" +
         this.props.match.params.shorten;
     }
@@ -16,6 +16,8 @@ class RedirectUrlComponent extends React.Component {
     componentDidMount() {
         this.props.getUrl();
         console.log(this.props.match.params.shorten)
+        // console.log("database:" + this.props.urls)
+        // // this.urlExist()
     }
 
     urlExist() {
@@ -26,7 +28,7 @@ class RedirectUrlComponent extends React.Component {
                 console.log("u shortern " + u.shortenUrl)
                 console.log("this shortern " + this.shortenUrl)
                 if (u.shortenUrl === this.shortenUrl) {
-                    this.url = u.url;
+                    this.originalUrl = u.originalUrl;
                     break;
                 }
             }
@@ -34,12 +36,18 @@ class RedirectUrlComponent extends React.Component {
     }
 
     render() {
+        // let originalUrl = this.props.redirectUrl.originalUrl;
+        // this.props.getUrl();
+        // console.log("database:" + this.props.urls)
+        // this.urlExist();
         console.log("this is redirectUrl")
+        // console.log(this.props.urls)
+        // console.log(this.props.match.params.shortenUrl)
         this.urlExist();
-        if (this.url.originalUrl.length === 0) {
+        if (this.originalUrl.length === 0) {
             return <h3>Url Not Found</h3>
         }
-
+        window.location.assign(this.originalUrl);
         return null;
     }
 }
