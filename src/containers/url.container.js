@@ -2,7 +2,6 @@
 import React from "react";
 import {connect} from 'react-redux';
 import {addUrl, deleteUrl, fetchUrl} from "../actions/url.action";
-import {addPokemon, deletePokemon, fetchPokemon} from '../actions/pokemon.action'
 import {withRouter} from "react-router";
 
 
