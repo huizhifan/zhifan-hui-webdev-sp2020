@@ -80,7 +80,7 @@ class Urls extends React.Component {
             <tr key={url._id}>
                 <td>{url.originalUrl}</td>
                 <td>{url.shortenUrl}</td>
-                <td><input type='button' value='Delete' onClick={() => this._deleteUrl(url._id)}/> </td>
+                {/*<td><input type='button' value='Delete' onClick={() => this._deleteUrl(url._id)}/> </td>*/}
             </tr>));
         console.log(this.duplicate)
         return (<table>
@@ -96,7 +96,7 @@ class Urls extends React.Component {
             <tr key={'input'}>
                 <td><input type={'text'} value={this.state.originalUrl} onChange={e => this._handleFormUpdate(e, 'originalUrl')}/></td>
                 <td><input type={'text'} value={this.state.shortenUrl} onChange={e => this._handleFormUpdate(e, 'shortenUrl')}/></td>
-                {/*<td><input type='button' value='submit' onClick={() => this._brandedUrl()}/> </td>*/}
+                <td><input type='button' value='submit' onClick={() => this._brandedUrl()}/> </td>
             </tr>
             </tbody>
         </table>)
