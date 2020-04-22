@@ -8,6 +8,7 @@ import {withRouter} from "react-router";
 class Urls extends React.Component {
     constructor() {
         super();
+        this.duplicate = false;
         this.state = {
             shortenUrl: ""
         };
@@ -40,7 +41,23 @@ class Urls extends React.Component {
         this.props.deleteUrl(id);
     }
 
+    _urlExist() {
+        for (let i = 0; i < this.props.urls.length; i++) {
+            let tmp = "https://zhifanhui--webdev-a4.herokuapp.com/" + this.state.shortenUrl
+            if (tmp  === this.props.urls[i].shortenUrl) {
+                this.duplicate = true;
+                return;
+            }
+        }
+        this.duplicate = false;
+    }
+
     _brandedUrl() {
+        this._urlExist();
+        if (this.duplicate) {
+            console.log("dupilcate")
+            return;
+        };
         let url = {};
         if (this.state.shortenUrl.length === 0) {
             url.shortenUrl = this.uuidv4();
@@ -63,8 +80,9 @@ class Urls extends React.Component {
             <tr key={url._id}>
                 <td>{url.originalUrl}</td>
                 <td>{url.shortenUrl}</td>
-                {/*<td><input type='button' value='Delete' onClick={() => this._deleteUrl(url._id)}/> </td>*/}
+                <td><input type='button' value='Delete' onClick={() => this._deleteUrl(url._id)}/> </td>
             </tr>));
+        console.log(this.duplicate)
         return (<table>
             <thead>
             <tr>

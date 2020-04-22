@@ -13,7 +13,6 @@
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "fsevents": "^2.1.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.9",
     "node-env-run": "^3.0.2",
@@ -32,12 +31,25 @@
     "uuid": "^7.0.2"
   },
   "scripts": {
-    "start": "run-p server devreact",
+    "start": "run-p server",
+    "build": "react-scripts build",
     "devreact": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "server": "node server/server.js",
+    "server": "node server.js",
     "devserver": "node-env-run server/server.js --exec nodemon",
     "dev": "run-p devserver devreact"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

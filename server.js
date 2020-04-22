@@ -1,14 +1,15 @@
 const express = require('express');
-const url = require('./controller/url.controller');
+const url = require('./server/controller/url.controller');
 
 const app = express();
 
 const mongoose = require('mongoose');
 const cookieParse = require('cookie-parser')
+const path = require('path');
 
 // This is the default address for MongoDB.
 // Make sure MongoDB is running!
-const mongoEndpoint = 'mongodb://127.0.0.1/pokemon_app';
+const mongoEndpoint = process.env.MONGODB_URI || 'mongodb://127.0.0.1/pokemon_app';
 // useNewUrlParser is not required, but the old parser is deprecated
 mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
 // Get the connection string
@@ -35,6 +36,14 @@ app.use(express.urlencoded({ extended: true }));
 // to distinguish them from frontend routes
 app.use('/api/url', url);
 
-app.listen(3001, function() {
+// const port = process.env.PORT
+app.use(express.static(path.join(__dirname, 'build')));
+
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+app.listen(process.env.PORT || 3001, function() {
     console.log('Starting server');
 });
